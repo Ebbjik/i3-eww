@@ -15,93 +15,101 @@
 (deflisten focused-workspace :initial "1" `$HOME/.config/eww/scripts/getfocusedws`)
 
 (defwidget workspaces [active-workspace focused-workspace urgent-workspace]
-	(box
-    :class "workspaces"
-    :orientation "h"
-		:space-evenly true
-    :halign "start"
-    
-		(button
+(box
+  :class "workspaces"
+  :orientation "h"
+  :space-evenly true
+  :halign "start"
+
+  (button
     :class {
-      arraylength(search(focused-workspace, "1")) > 0 ? "focused-workspace" : 
-      arraylength(search(urgent-workspace, "1")) > 0 ? "urgent-workspace" : 
-      arraylength(search(active-workspace, "1")) > 0 ? "active-workspace" : 
+      arraylength(search(focused-workspace, "1: ")) > 0 ? "focused-workspace" : 
+      arraylength(search(urgent-workspace, "1: ")) > 0 ? "urgent-workspace" : 
+      arraylength(search(active-workspace, "1: ")) > 0 ? "active-workspace" : 
       "regular"
     }
-    :onclick "i3-msg workspace 1" 1)
+    :onclick "i3-msg workspace '1: '"
+    "1")
 
-    (button  
+  (button
     :class {
-      arraylength(search(focused-workspace, "2")) > 0 ? "focused-workspace" : 
-      arraylength(search(urgent-workspace, "2")) > 0 ? "urgent-workspace" : 
-      arraylength(search(active-workspace, "2")) > 0 ? "active-workspace" : 
+      arraylength(search(focused-workspace, "2: ")) > 0 ? "focused-workspace" : 
+      arraylength(search(urgent-workspace, "2: ")) > 0 ? "urgent-workspace" : 
+      arraylength(search(active-workspace, "2: ")) > 0 ? "active-workspace" : 
       "regular"
     }
-    :onclick "i3-msg workspace 2" 2)
+    :onclick "i3-msg workspace '2: '"
+    "2")
 
-    (button
+  (button
     :class {
-      arraylength(search(focused-workspace, "3")) > 0 ? "focused-workspace" : 
-      arraylength(search(urgent-workspace, "3")) > 0 ? "urgent-workspace" : 
-      arraylength(search(active-workspace, "3")) > 0 ? "active-workspace" : 
+      arraylength(search(focused-workspace, "3: ")) > 0 ? "focused-workspace" : 
+      arraylength(search(urgent-workspace, "3: ")) > 0 ? "urgent-workspace" : 
+      arraylength(search(active-workspace, "3: ")) > 0 ? "active-workspace" : 
       "regular"
     }
-    :onclick "i3-msg workspace 3" 3)
+    :onclick "i3-msg workspace '3: '"
+    "3")
 
-    (button
+  (button
     :class {
-      arraylength(search(focused-workspace, "4")) > 0 ? "focused-workspace" : 
-      arraylength(search(urgent-workspace, "4")) > 0 ? "urgent-workspace" : 
-      arraylength(search(active-workspace, "4")) > 0 ? "active-workspace" : 
+      arraylength(search(focused-workspace, "4: ")) > 0 ? "focused-workspace" : 
+      arraylength(search(urgent-workspace, "4: ")) > 0 ? "urgent-workspace" : 
+      arraylength(search(active-workspace, "4: ")) > 0 ? "active-workspace" : 
       "regular"
     }
-    :onclick "i3-msg workspace 4" 4)
+    :onclick "i3-msg workspace '4: '"
+    "4")
 
-    (button
+  (button
     :class {
       arraylength(search(focused-workspace, "5")) > 0 ? "focused-workspace" : 
       arraylength(search(urgent-workspace, "5")) > 0 ? "urgent-workspace" : 
       arraylength(search(active-workspace, "5")) > 0 ? "active-workspace" : 
       "regular"
     }
-    :onclick "i3-msg workspace 5" 5)
+    :onclick "i3-msg workspace '5'"
+    "5")
 
-    (button
+  (button
     :class {
       arraylength(search(focused-workspace, "6")) > 0 ? "focused-workspace" : 
       arraylength(search(urgent-workspace, "6")) > 0 ? "urgent-workspace" : 
       arraylength(search(active-workspace, "6")) > 0 ? "active-workspace" : 
       "regular"
     }
-    :onclick "i3-msg workspace 6" 6)
+    :onclick "i3-msg workspace '6'"
+    "6")
 
-    (button
+  (button
     :class {
       arraylength(search(focused-workspace, "7")) > 0 ? "focused-workspace" : 
       arraylength(search(urgent-workspace, "7")) > 0 ? "urgent-workspace" : 
       arraylength(search(active-workspace, "7")) > 0 ? "active-workspace" : 
       "regular"
     }
-    :onclick "i3-msg workspace 7" 7)
+    :onclick "i3-msg workspace '7'"
+    "7")
 
-    (button
+  (button
     :class {
       arraylength(search(focused-workspace, "8")) > 0 ? "focused-workspace" : 
       arraylength(search(urgent-workspace, "8")) > 0 ? "urgent-workspace" : 
       arraylength(search(active-workspace, "8")) > 0 ? "active-workspace" : 
       "regular"
     }
-    :onclick "i3-msg workspace 8" 8)
+    :onclick "i3-msg workspace '8'"
+    "8")
 
-    (button
+  (button
     :class {
       arraylength(search(focused-workspace, "9")) > 0 ? "focused-workspace" : 
       arraylength(search(urgent-workspace, "9")) > 0 ? "urgent-workspace" : 
       arraylength(search(active-workspace, "9")) > 0 ? "active-workspace" : 
       "regular"
     }
-    :onclick "i3-msg workspace 9" 9)
-  )
+    :onclick "i3-msg workspace '9'"
+    "9")
 )
 
 
@@ -111,8 +119,9 @@
     :orientation "h" 
     :space-evenly false 
     :halign "end"
-    (network :strength net :offline "󰤭" :excellent "󰤨" :good "󰤥"
-            :okay "󰤢" :slow "󰤟")
+    (network :strength net_strength :ssid net_ssid
+         :offline "󰤭" :excellent "󰤨" :good "󰤥"
+         :okay "󰤢" :slow "󰤟")
     (audio :high "" :medium "󰖀" :low "󰕿" :muted "󰝟"
             :volume volume)
     (cpu_usage :icon "󰍛")
@@ -197,21 +206,27 @@
 )
 
 
-(defpoll net :interval "1s"
+(defpoll net_strength :interval "1s"
+  :initial `0`
+  `nmcli -t -f IN-USE,SIGNAL device wifi | awk -F':' '$1=="*" {print $2}'`)
+
+(defpoll net_ssid :interval "1s"
   :initial `N/A`
-  `nmcli -t -f SIGNAL,ACTIVE device wifi \
-    | awk -F':' '{if($2=="yes")print$1}'`)
-(defwidget network [strength offline excellent
-                    good okay slow]
+  `nmcli -t -f IN-USE,SSID device wifi | awk -F':' '$1=="*" {print $2}'`)
+
+(defwidget network [strength ssid offline excellent good okay slow]
   (eventbox
     :onmiddleclick `$HOME/.config/eww/scripts/togglewifi`
     (box
-    :space-evenly false
-    :spacing 8
-      (label :text {strength == "" ? offline :
-        strength < 26 ? slow :
-          strength < 51 ? okay :
-            strength < 76 ? good : excellent})
+      :space-evenly false
+      :spacing 8
+      (label :text {
+        (strength == "" ? offline :
+          strength < 26 ? slow :
+            strength < 51 ? okay :
+              strength < 76 ? good : excellent)
+        + "  " + ssid
+      })
     )
   )
 )
